@@ -97,12 +97,12 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/utils.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
@@ -112,8 +112,9 @@ var mouse = {
   x: innerWidth / 2,
   y: innerHeight / 2
 };
-var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66']; // Event Listeners
+var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
 
+// Event Listeners
 addEventListener('mousemove', function (event) {
   mouse.x = event.clientX;
   mouse.y = event.clientY;
@@ -122,18 +123,17 @@ addEventListener('resize', function () {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
   init();
-}); // Objects
+});
 
+// Objects
 var _Object = /*#__PURE__*/function () {
   function Object(x, y, radius, color) {
     _classCallCheck(this, Object);
-
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
   }
-
   _createClass(Object, [{
     key: "draw",
     value: function draw() {
@@ -149,25 +149,22 @@ var _Object = /*#__PURE__*/function () {
       this.draw();
     }
   }]);
-
   return Object;
 }(); // Implementation
-
-
 var objects;
-
 function init() {
   objects = [];
-
-  for (var i = 0; i < 400; i++) {// objects.push()
+  for (var i = 0; i < 400; i++) {
+    // objects.push()
   }
-} // Animation Loop
+}
 
-
+// Animation Loop
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
-  c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y); // objects.forEach(object => {
+  c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y);
+  // objects.forEach(object => {
   //  object.update()
   // })
 }
@@ -187,17 +184,14 @@ animate();
 function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
 function randomColor(colors) {
   return colors[Math.floor(Math.random() * colors.length)];
 }
-
 function distance(x1, y1, x2, y2) {
   var xDist = x2 - x1;
   var yDist = y2 - y1;
   return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
 }
-
 module.exports = {
   randomIntFromRange: randomIntFromRange,
   randomColor: randomColor,
