@@ -1,4 +1,3 @@
-
 import platform from '../img/platform.png'
 import hills from '../img/hills.png'
 import background from '../img/background.png'
@@ -10,18 +9,11 @@ import spriteRunRight from '../img/spriteRunRight.png'
 import spriteStandLeft from '../img/spriteStandLeft.png'
 import spriteStandRight from '../img/spriteStandRight.png'
 
-
-
-
 const canvas = document.querySelector('canvas')
-
 const c = canvas.getContext('2d')
-
-canvas.width = 1024
+canvas.width = 1224
 canvas.height = 576
-
 const gravity = 1.5
-
 class Player {
   constructor() {
     this.speed = 10
@@ -33,8 +25,7 @@ class Player {
       x: 0,
       y: 0
     }
-
-    this.width = 66
+    this.width = 70
     this.height = 150
     this.image = createImage(spriteStandRight)
     this.frames = 0
@@ -129,6 +120,9 @@ const keys = {
   },
   left: {
     pressed: false
+  },
+  up: {
+    pressed: false
   }
 }
 
@@ -140,6 +134,9 @@ function init() {
   player = new Player()
   platforms = [
     new Platform({ x: platformImage.width * 4 + 300 - 2 + platformImage.width - platformSmallTallImage.width, y: 270, image: createImage(platformSmallTall) }),
+    new Platform({ x: platformImage.width * 6 + 300 - 2 + platformImage.width - platformSmallTallImage.width, y: 270, image: createImage(platformSmallTall) }),
+    new Platform({ x: platformImage.width * 9 + 300 - 2 + platformImage.width - platformSmallTallImage.width, y: 270, image: createImage(platformSmallTall) }),
+    new Platform({ x: platformImage.width * 11 + 500 - 2 + platformImage.width - platformSmallTallImage.width, y: 270, image: createImage(platformSmallTall) }),
     new Platform({
       x: -1,
       y: 470,
@@ -148,8 +145,13 @@ function init() {
     new Platform({ x: platformImage.width - 3, y: 470, image: platformImage }),
     new Platform({ x: platformImage.width * 2 + 100, y: 470, image: platformImage }),
     new Platform({ x: platformImage.width * 3 + 300, y: 470, image: platformImage }),
-    new Platform({ x: platformImage.width * 4 + 300 - 2, y: 470, image: platformImage }),
-    new Platform({ x: platformImage.width * 5 + 700 - 2, y: 470, image: platformImage })
+    new Platform({ x: platformImage.width * 4 + 500 - 2, y: 470, image: platformImage }),
+    new Platform({ x: platformImage.width * 5 + 700 - 2, y: 470, image: platformImage }),
+    new Platform({ x: platformImage.width * 6 + 700 - 2, y: 470, image: platformImage }),
+    new Platform({ x: platformImage.width * 8 + 700 - 2, y: 470, image: platformImage }),
+    new Platform({ x: platformImage.width * 9 + 700 - 2, y: 470, image: platformImage }),
+    new Platform({ x: platformImage.width * 11 + 700 - 2, y: 470, image: platformImage }),
+    new Platform({ x: platformImage.width * 12 + 700 - 2, y: 470, image: platformImage })
   ]
 
   genericObject = [
@@ -276,6 +278,7 @@ addEventListener('keydown', ({ keyCode }) => {
       break
     case 38:
       console.log('up')
+      
       player.velocity.y -= 25
       break
   }
@@ -298,7 +301,60 @@ addEventListener('keyup', ({ keyCode }) => {
       break
     case 38:
       console.log('up')
+      keys.up.pressed = false
 
       break
   }
 })
+    // Define la función para mover hacia la derecha
+function moveRight() {
+  console.log('right');
+  keys.right.pressed = true;
+  lastKey = 'right';
+}
+
+// Define la función para detener el movimiento hacia la derecha
+function stopMoveRight() {
+  console.log('stop right');
+  keys.right.pressed = false;
+}
+
+// Asigna las funciones a los eventos mousedown y mouseup del botón para mover hacia la derecha
+document.querySelector('input[value=">"]').addEventListener('mousedown', moveRight);
+document.querySelector('input[value=">"]').addEventListener('mouseup', stopMoveRight);
+
+// Define la función para mover hacia la izquierda
+function moveLeft() {
+  console.log('left');
+  keys.left.pressed = true;
+  lastKey = 'left';
+}
+
+// Define la función para detener el movimiento hacia la izquierda
+function stopMoveLeft() {
+  console.log('stop left');
+  keys.left.pressed = false;
+}
+
+// Asigna las funciones a los eventos mousedown y mouseup del botón para mover hacia la izquierda
+document.querySelector('input[value="<"]').addEventListener('mousedown', moveLeft);
+document.querySelector('input[value="<"]').addEventListener('mouseup', stopMoveLeft);
+
+// Define la función para saltar
+function jump() {
+  console.log('jump');
+  keys.up.pressed = true;
+  player.velocity.y -= 25
+  lastKey = 'up';
+}
+
+// Define la función para detener el salto
+function stopJump() {
+  console.log('stop jump');
+  keys.up.pressed = false;
+}
+
+// Asigna las funciones a los eventos mousedown y mouseup del botón para saltar
+document.querySelector('input[value="Jump"]').addEventListener('mousedown', jump);
+document.querySelector('input[value="Jump"]').addEventListener('mouseup', stopJump);
+

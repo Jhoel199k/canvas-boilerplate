@@ -2,21 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Canvas Boilerplate | Chris Courses</title>
+    <title>Juego de Mario 0.0.01</title>
     <style>
       body {
         margin: 0;
         background-color: black;
-        display: flex;
+        margin-top: 5%;
+        margin-left: 15%;
         align-items: center;
         justify-content: center;
         height: 100vh;
-
       }
     </style>
   </head>
+ 
   <body>
+
     <canvas></canvas>
-   
+    <br>
+    <input type="button" value="<" onclick="moveLeft()"style=" font-size: 500% ;border: 2px solid green; background-color: black;color: green;border-radius: 50%; width: 10%;
+    height: 13%;"  />
+    <input type="button" value=">" onclick="moveRight()" style="font-size: 500%; border: 2px solid green; background-color: black;color: green;border-radius: 50%; width: 10%;
+    height: 13%;" />
+    <input type="button" value="Jump" onmousedown="jump()" onmouseup="stopJump()" style="margin-left: 47%; font-size: 200%; border: 2px solid green; background-color: black;
+    color: green;border-radius: 50%;    width: 10%;height: 13%;" />
+
+
   </body>
 </html>

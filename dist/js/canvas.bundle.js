@@ -238,7 +238,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
-canvas.width = 1024;
+canvas.width = 1224;
 canvas.height = 576;
 var gravity = 1.5;
 var Player = /*#__PURE__*/function () {
@@ -253,7 +253,7 @@ var Player = /*#__PURE__*/function () {
       x: 0,
       y: 0
     };
-    this.width = 66;
+    this.width = 70;
     this.height = 150;
     this.image = createImage(_img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_8__["default"]);
     this.frames = 0;
@@ -353,6 +353,9 @@ var keys = {
   },
   left: {
     pressed: false
+  },
+  up: {
+    pressed: false
   }
 };
 var scrollOffset = 0;
@@ -361,6 +364,18 @@ function init() {
   player = new Player();
   platforms = [new Platform({
     x: platformImage.width * 4 + 300 - 2 + platformImage.width - platformSmallTallImage.width,
+    y: 270,
+    image: createImage(_img_platformSmallTall_png__WEBPACK_IMPORTED_MODULE_3__["default"])
+  }), new Platform({
+    x: platformImage.width * 6 + 300 - 2 + platformImage.width - platformSmallTallImage.width,
+    y: 270,
+    image: createImage(_img_platformSmallTall_png__WEBPACK_IMPORTED_MODULE_3__["default"])
+  }), new Platform({
+    x: platformImage.width * 9 + 300 - 2 + platformImage.width - platformSmallTallImage.width,
+    y: 270,
+    image: createImage(_img_platformSmallTall_png__WEBPACK_IMPORTED_MODULE_3__["default"])
+  }), new Platform({
+    x: platformImage.width * 11 + 500 - 2 + platformImage.width - platformSmallTallImage.width,
     y: 270,
     image: createImage(_img_platformSmallTall_png__WEBPACK_IMPORTED_MODULE_3__["default"])
   }), new Platform({
@@ -380,11 +395,31 @@ function init() {
     y: 470,
     image: platformImage
   }), new Platform({
-    x: platformImage.width * 4 + 300 - 2,
+    x: platformImage.width * 4 + 500 - 2,
     y: 470,
     image: platformImage
   }), new Platform({
     x: platformImage.width * 5 + 700 - 2,
+    y: 470,
+    image: platformImage
+  }), new Platform({
+    x: platformImage.width * 6 + 700 - 2,
+    y: 470,
+    image: platformImage
+  }), new Platform({
+    x: platformImage.width * 8 + 700 - 2,
+    y: 470,
+    image: platformImage
+  }), new Platform({
+    x: platformImage.width * 9 + 700 - 2,
+    y: 470,
+    image: platformImage
+  }), new Platform({
+    x: platformImage.width * 11 + 700 - 2,
+    y: 470,
+    image: platformImage
+  }), new Platform({
+    x: platformImage.width * 12 + 700 - 2,
     y: 470,
     image: platformImage
   })];
@@ -510,9 +545,61 @@ addEventListener('keyup', function (_ref4) {
       break;
     case 38:
       console.log('up');
+      keys.up.pressed = false;
       break;
   }
 });
+// Define la función para mover hacia la derecha
+function moveRight() {
+  console.log('right');
+  keys.right.pressed = true;
+  lastKey = 'right';
+}
+
+// Define la función para detener el movimiento hacia la derecha
+function stopMoveRight() {
+  console.log('stop right');
+  keys.right.pressed = false;
+}
+
+// Asigna las funciones a los eventos mousedown y mouseup del botón para mover hacia la derecha
+document.querySelector('input[value=">"]').addEventListener('mousedown', moveRight);
+document.querySelector('input[value=">"]').addEventListener('mouseup', stopMoveRight);
+
+// Define la función para mover hacia la izquierda
+function moveLeft() {
+  console.log('left');
+  keys.left.pressed = true;
+  lastKey = 'left';
+}
+
+// Define la función para detener el movimiento hacia la izquierda
+function stopMoveLeft() {
+  console.log('stop left');
+  keys.left.pressed = false;
+}
+
+// Asigna las funciones a los eventos mousedown y mouseup del botón para mover hacia la izquierda
+document.querySelector('input[value="<"]').addEventListener('mousedown', moveLeft);
+document.querySelector('input[value="<"]').addEventListener('mouseup', stopMoveLeft);
+
+// Define la función para saltar
+function jump() {
+  console.log('jump');
+  keys.up.pressed = true;
+  player.velocity.y -= 25;
+  lastKey = 'up';
+}
+
+// Define la función para detener el salto
+function stopJump() {
+  console.log('stop jump');
+  keys.up.pressed = false;
+}
+
+// Asigna las funciones a los eventos mousedown y mouseup del botón para saltar
+document.querySelector('input[value="Jump"]').addEventListener('mousedown', jump);
+document.querySelector('input[value="Jump"]').addEventListener('mouseup', stopJump);
 
 /***/ })
 
